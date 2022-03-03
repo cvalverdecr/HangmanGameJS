@@ -1,17 +1,27 @@
 "use strict";
+window.onload = function(e) {
+    let today = new Date();
+    let date =
+        today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate();
+    console.log(date);
 
-let today = new Date();
-let date =
-    today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate();
-console.log(date);
+    loadJSON();
+    var jsonData = null;
+    var palabras = [];
 
-function GetComputerName() {
-    try {
-        var network = new ActiveXObject("WScript.Network");
-        // Show a pop up if it works
-        alert(network.computerName);
-    } catch (e) {}
-}
-let computerName = "";
-computerName = GetComputerName();
-console.log(computerName);
+    function loadJSON() {
+        fetch("palabras.json")
+            .then((response) => response.json())
+            .then((data) => {
+                jsonData = data;
+                //console.log(jsonData);
+                for (const key in jsonData) {
+                    palabras.push(jsonData[key]);
+                }
+                console.dir(palabras);
+                startGame();
+            });
+    }
+
+    function startGame() {}
+};
