@@ -23,5 +23,16 @@ window.onload = function(e) {
             });
     }
 
-    function startGame() {}
+    function startGame() {
+        let random = 0;
+        let last_random = -1;
+        if (random != last_random) {
+            random = Math.floor(Math.random() * 19);
+            last_random = random;
+
+            console.log(random);
+            console.log(palabras[random]);
+            random = 0;
+        }
+    }
 };
