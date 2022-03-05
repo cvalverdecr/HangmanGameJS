@@ -1,0 +1,23 @@
+.principal {
+    background: whitesmoke;
+    max-width: 100%;
+}
+
+h1 {
+    color: burlywood;
+}
+
+.imagen {
+    width: 100%;
+    max-width: 1200px;
+}
+
+footer {
+    position: fixed;
+    width: 100%;
+    left: 0;
+    bottom: 0;
+    background-color: #62b39a;
+    color: white;
+    text-align: center;
+}
