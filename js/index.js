@@ -1,10 +1,14 @@
 "use strict";
-window.onload = function(e) {
+window.onload = init;
+
+function init(e) {
     let today = new Date();
-    let username = "";
-    let word = "";
+    let username = document.getElementById("usernameText");
+    let word = document.getElementById("word");
     let score = 0;
     let lives = 0;
+    let btnNewGame = document.getElementById("btnNewGame");
+    btnNewGame.onclick = newGame;
 
     let date =
         today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate();
@@ -25,7 +29,7 @@ window.onload = function(e) {
                     palabras.push(jsonData[key]);
                 }
                 //console.dir(palabras);
-                startGame();
+                //startGame();
             });
     }
 
@@ -38,22 +42,36 @@ window.onload = function(e) {
 
             console.log(random);
             console.log(palabras[random]);
-            //document.getElementById("word").innerHTML = palabras[random].Palabra;
+            word.innerHTML = palabras[random].Palabra;
             random = 0;
         }
 
-        const btnGetUsername = document.getElementById("btnGetUsername");
-
-        btnGetUsername.addEventListener("click", function(e) {
-            username = document.getElementById("usernameText").value;
-            if (username != null) {
-                username = document.getElementById("usernameText").value;
-                console.log(username);
-                document.getElementById("word").innerHTML = palabras[random].Palabra;
-            } else {
-                alert("You must type an Username to continue....");
-            }
-            //document.getElementById("divusername").style.display = "none";
-        });
+        // const btnGetUsername = document.getElementById("btnGetUsername");
+        // debugger;
+        // btnGetUsername.addEventListener("onclick", function() {
+        //     username = document.getElementById("usernameText").value;
+        //     if (username != null) {
+        //         username = document.getElementById("usernameText").value;
+        //         console.log(username);
+        //         startGame();
+        //         document.getElementById("word").innerHTML = palabras[random].Palabra;
+        //     } else {
+        //         alert("You must type an Username to continue....");
+        //     }
+        //     //document.getElementById("divusername").style.display = "none";
+        // });
     }
-};
+
+    function newGame() {
+        username = username.value;
+        if (username != "") {
+            username = document.getElementById("usernameText").value;
+            console.log(`El usuario registrado es: ${username}`);
+            startGame();
+
+            username.value = "";
+        } else {
+            alert("You must type an Username to continue....");
+        }
+    }
+}
