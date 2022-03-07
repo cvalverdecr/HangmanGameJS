@@ -63,15 +63,13 @@ function init(e) {
     }
 
     function newGame() {
-        username = username.value;
-        if (username != "") {
-            username = document.getElementById("usernameText").value;
-            console.log(`El usuario registrado es: ${username}`);
-            startGame();
-
-            username.value = "";
-        } else {
+        if (username.value.length == "0") {
             alert("You must type an Username to continue....");
+        } else {
+            //username = document.getElementById("usernameText").value;
+            console.log(`El usuario registrado es: ${username.value}`);
+            startGame();
+            username.value = "";
         }
     }
 }
