@@ -7,12 +7,10 @@ function init(e) {
     let word = document.getElementById("word");
     let score = 0;
     let lives = 0;
-<<<<<<< HEAD
-    let btnNewGame = document.getElementById("btnNewGame");
-    btnNewGame.onclick = newGame;
-=======
     let letters;
-
+    const divusername = document.querySelector(".divusername");
+    const playername = document.getElementById("playername");
+    const wrapper = document.querySelector(".wrapper");
     const letterDiv = document.querySelector(".letter-div");
     const hintButton = document.querySelector(".hint-btn");
     const resetButton = document.querySelector(".reset-btn");
@@ -24,7 +22,9 @@ function init(e) {
     const notifContent = document.querySelector(".notif-content");
     const notifSpan = document.querySelector(".notif-span");
     const playAgain = document.querySelector(".notif-btn");
->>>>>>> main
+
+    let btnNewGame = document.getElementById("btnNewGame");
+    btnNewGame.onclick = newGame;
 
     let date =
         today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate();
@@ -46,6 +46,10 @@ function init(e) {
                 }
                 //console.dir(palabras);
                 //startGame();
+                wrapper.classList.add("wrapper-show", "wrapper-hidden");
+                wrapper.classList.remove("wrapper-show");
+                divusername.classList.add("divusername-show", "divusername-hidden");
+                divusername.classList.remove("divusername-hidden");
             });
     }
 
@@ -60,27 +64,22 @@ function init(e) {
             console.log(palabras[random]);
             word.innerHTML = palabras[random].Palabra;
             random = 0;
+            wrapper.classList.add("wrapper-show", "wrapper-hidden");
+            wrapper.classList.remove("wrapper-hidden");
+            divusername.classList.add("divusername-hidden", "divusername-show");
+            wrapper.classList.remove("divusername-show");
+            playername.innerHTML = `Welcome ${username.value}`;
         }
-
-        // const btnGetUsername = document.getElementById("btnGetUsername");
-        // debugger;
-        // btnGetUsername.addEventListener("onclick", function() {
-        //     username = document.getElementById("usernameText").value;
-        //     if (username != null) {
-        //         username = document.getElementById("usernameText").value;
-        //         console.log(username);
-        //         startGame();
-        //         document.getElementById("word").innerHTML = palabras[random].Palabra;
-        //     } else {
-        //         alert("You must type an Username to continue....");
-        //     }
-        //     //document.getElementById("divusername").style.display = "none";
-        // });
     }
 
     function newGame() {
         if (username.value.length == "0") {
-            alert("You must type an Username to continue....");
+            Swal.fire({
+                icon: "error",
+                title: "Username required",
+                text: `You must type an Username to continue....`,
+            });
+            //alert("You must type an Username to continue....");
         } else {
             //username = document.getElementById("usernameText").value;
             console.log(`El usuario registrado es: ${username.value}`);
@@ -88,9 +87,6 @@ function init(e) {
             username.value = "";
         }
     }
-<<<<<<< HEAD
-}
-=======
 
     // get random word from word_list function
     const getRandomWord = function(list) {
@@ -211,5 +207,4 @@ function init(e) {
     playAgain.addEventListener("click", function() {
         init("reset");
     });
-};
->>>>>>> main
+}

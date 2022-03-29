@@ -7,9 +7,24 @@ h1 {
     color: burlywood;
 }
 
-.imagen {
+
+/* .imagen {
     width: 100%;
     max-width: 1200px;
+} */
+
+.imagen {
+    width: 300px;
+    height: 400px;
+    border: 2px solid;
+    margin-bottom: 30px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.imagen img {
+    width: 100%;
 }
 
 footer {
@@ -24,10 +39,6 @@ footer {
 
 
 /* 
-<<<<<<< HEAD
-//remover clase o poner clase desde acá
-classlist.add classlist.remove */
-=======
 
 //remover clase o poner clase desde acá
 classlist.add classlist.remove */
@@ -106,4 +117,28 @@ body {
 .hidden {
     display: none;
 }
->>>>>>> main
+
+.wrapper-show {
+    display: block;
+    visibility: visible;
+}
+
+.wrapper-hidden {
+    display: none;
+    visibility: hidden;
+}
+
+.divusername-show {
+    display: block;
+    visibility: visible;
+}
+
+.divusername-hidden {
+    display: none;
+    visibility: hidden;
+}
+
+#playername {
+    color: #62b39a;
+    font: bold;
+}
