@@ -33,7 +33,7 @@
                 <form class="row gy-2 gx-3 align-items-center">
                     <div class="col-auto">
                         <label class="visually-hidden" for="autoSizingInput">Name</label>
-                        <input type="text" class="form-control" id="usernameText" placeholder="Carlos Valverde" />
+                        <input type="text" class="form-control" id="usernameText" placeholder="Username" />
                     </div>
                     <div class="col-auto">
                         <button id="btnNewGame" type="button" class="btn btn-primary">
@@ -49,7 +49,7 @@
             <label id="word">La palabra es:</label>
         </div>
         <div class="wrapper">
-            <h2 class="row d-flex align-items-center justify-content-center" id="playername">Welcome</h2>
+            <h2 class="row d-flex align-items-center justify-content-center mb-5" id="playername">Welcome</h2>
             <h3>Choose the alphabet below to guess the word.</h3>
             <div class="letter-div"></div>
             <p>Get a hint if you need any help</p>
@@ -60,8 +60,8 @@
             <div class="word-div"></div>
             <h3>Remaining Lives: <span class="lives">5</span></h3>
             <div class="row hint-div">
-                <button class="hint-btn">Hint</button>
-                <button class="reset-btn">Reset</button>
+                <button class="hint-btn btn btn-warning mb-3">Hint</button>
+                <button class="reset-btn btn btn-danger">Reset</button>
             </div>
         </div>
         <div class="notif hidden">
