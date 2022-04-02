@@ -44,8 +44,6 @@ function init(e) {
                 for (const key in jsonData) {
                     palabras.push(jsonData[key]);
                 }
-                //console.dir(palabras);
-                //startGame();
                 wrapper.classList.add("wrapper-show", "wrapper-hidden");
                 wrapper.classList.remove("wrapper-show");
                 divusername.classList.add("divusername-show", "divusername-hidden");
@@ -53,40 +51,11 @@ function init(e) {
             });
     }
 
-    function startGame() {
-        let random = 0;
-        let last_random = -1;
-        if (random != last_random) {
-            random = Math.floor(Math.random() * 19);
-            last_random = random;
+    // Check the next code
 
-            console.log(random);
-            console.log(palabras[random]);
-            word.innerHTML = palabras[random].Palabra;
-            random = 0;
-            wrapper.classList.add("wrapper-show", "wrapper-hidden");
-            wrapper.classList.remove("wrapper-hidden");
-            divusername.classList.add("divusername-hidden", "divusername-show");
-            wrapper.classList.remove("divusername-show");
-            playername.innerHTML = `Welcome ${username.value}`;
-        }
-    }
-
-    function newGame() {
-        if (username.value.length == "0") {
-            Swal.fire({
-                icon: "error",
-                title: "Username required",
-                text: `You must type an Username to continue....`,
-            });
-            //alert("You must type an Username to continue....");
-        } else {
-            //username = document.getElementById("usernameText").value;
-            console.log(`El usuario registrado es: ${username.value}`);
-            startGame();
-            username.value = "";
-        }
-    }
+    // random word will be selected upon every reset and init
+    let wordSelected;
+    let hint = "";
 
     // get random word from word_list function
     const getRandomWord = function(list) {
@@ -94,10 +63,8 @@ function init(e) {
         //return list[Math.floor(Math.random() * word_list.length)];
     };
 
-    // random word will be selected upon every reset and init
-    let select_word;
-
-    const init = function(state) {
+    //Init Function
+    const fInit = function(state) {
         wordDiv.innerHTML = "";
         if (state === "start") {
             // putting all letters into html
@@ -112,7 +79,7 @@ function init(e) {
                 notif.classList.add("hidden");
             });
         }
-        select_word = getRandomWord(palabras);
+
         lives = 5;
 
         // capturing letters div
@@ -120,18 +87,23 @@ function init(e) {
         liveSpan.textContent = lives;
 
         // putting selected word
-        for (let i = 0; i < select_word.length; i++) {
+        for (let i = 0; i < wordSelected.length; i++) {
             const html = `<p class="word">_</p>`;
             wordDiv.insertAdjacentHTML("beforeend", html);
         }
+
+        debugger;
+        // listening to letter buttons presses
+        letters.forEach((btn) => {
+            btn.addEventListener("click", letterPress);
+        });
     };
-    // initializing the page
-    init("start");
+    //End Init Function
 
     // show notification
     const showNotif = function(msg) {
         notif.classList.remove("hidden");
-        notifSpan.textContent = select_word;
+        notifSpan.textContent = wordSelected;
         notifContent.textContent = `You ${msg}`;
         // lives = 3;
     };
@@ -146,11 +118,11 @@ function init(e) {
         }
     };
 
-    // get multiple matching indexes of pressed letter
+    // get multiple matching indexes of pressed letters
     // to the selected word
     const getindexes = function(letter) {
         let indexes = [];
-        [...select_word].forEach((val, i) => {
+        [...wordSelected].forEach((val, i) => {
             if (val === letter) {
                 const index = i;
                 indexes.push(index);
@@ -175,7 +147,7 @@ function init(e) {
     const letterPress = function() {
         const letter = this.textContent.toLowerCase();
 
-        if (select_word.includes(letter)) {
+        if (wordSelected.includes(letter)) {
             const indexes_list = getindexes(letter);
             indexes_list.forEach((val, i) => {
                 wordDiv.children[val].textContent = this.textContent;
@@ -187,15 +159,10 @@ function init(e) {
         this.classList.add("disabled");
     };
 
-    // listening to letter buttons presses
-    letters.forEach((btn) => {
-        btn.addEventListener("click", letterPress);
-    });
-
     // Listening to hint btn
     hintButton.addEventListener("click", function() {
         hintDiv.classList.remove("hidden");
-        hintText.textContent = words.get(select_word);
+        hintText.textContent = hint;
     });
 
     // listening to reset btn
@@ -207,4 +174,46 @@ function init(e) {
     playAgain.addEventListener("click", function() {
         init("reset");
     });
+
+    // end the check code
+
+    function startGame() {
+        let random = 0;
+        let last_random = -1;
+        if (random != last_random) {
+            random = Math.floor(Math.random() * 19);
+            last_random = random;
+
+            console.log(random);
+            console.log(palabras[random]);
+            wordSelected = palabras[random].Palabra.toLowerCase();
+            hint = palabras[random].Pista;
+            word.innerHTML = wordSelected;
+
+            random = 0;
+            wrapper.classList.add("wrapper-show", "wrapper-hidden");
+            wrapper.classList.remove("wrapper-hidden");
+            divusername.classList.add("divusername-hidden", "divusername-show");
+            wrapper.classList.remove("divusername-show");
+            playername.innerHTML = `Welcome ${username.value}`;
+            // initializing the page
+            fInit("start");
+        }
+    }
+
+    function newGame() {
+        if (username.value.length == "0") {
+            Swal.fire({
+                icon: "error",
+                title: "Username required",
+                text: `You must type an Username to continue....`,
+            });
+            //alert("You must type an Username to continue....");
+        } else {
+            //username = document.getElementById("usernameText").value;
+            console.log(`El usuario registrado es: ${username.value}`);
+            startGame();
+            username.value = "";
+        }
+    }
 }
