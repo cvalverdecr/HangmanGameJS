@@ -217,3 +217,5 @@ function init(e) {
         }
     }
 }
+
+//revisar el codigo al ganar no se oculta al darle play agai
