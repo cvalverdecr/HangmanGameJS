@@ -92,7 +92,6 @@ function init(e) {
             wordDiv.insertAdjacentHTML("beforeend", html);
         }
 
-        debugger;
         // listening to letter buttons presses
         letters.forEach((btn) => {
             btn.addEventListener("click", letterPress);
@@ -172,6 +171,16 @@ function init(e) {
 
     // listening to play again button
     playAgain.addEventListener("click", function() {
+        hintDiv.classList.add("hidden");
+        notif.classList.add("hidden");
+        letters.forEach((btn) => {
+            btn.classList.remove("disabled");
+        });
+        let elem = document.querySelectorAll(".alpha");
+        for (let i = 0; i < elem.length; i++) {
+            let item = elem[i];
+            item.remove();
+        }
         init("reset");
     });
 
